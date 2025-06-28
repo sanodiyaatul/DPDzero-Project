@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./feedback-system-new/teampulse-backend/backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./feedback-system-new/teampulse-backend/backend:/app
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules    # ✅ Prevent wiping node_modules in container
+    depends_on:
+      - backend
